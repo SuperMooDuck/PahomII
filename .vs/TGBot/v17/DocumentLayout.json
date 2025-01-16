@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\SuperMooDuck\\source\\repos\\SuperMooDuck\\PahomII\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{061262E2-DF60-46B2-96DE-86B77A671C92}|TGBot.pyproj|C:\\Users\\SuperMooDuck\\Source\\Repos\\SuperMooDuck\\PahomII\\TGBot.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{061262E2-DF60-46B2-96DE-86B77A671C92}|TGBot.pyproj|solutionrelative:TGBot.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TGBot.py",
+              "DocumentMoniker": "C:\\Users\\SuperMooDuck\\source\\repos\\SuperMooDuck\\PahomII\\TGBot.py",
+              "RelativeDocumentMoniker": "TGBot.py",
+              "ToolTip": "C:\\Users\\SuperMooDuck\\source\\repos\\SuperMooDuck\\PahomII\\TGBot.py",
+              "RelativeToolTip": "TGBot.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-11-02T03:07:48.771Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
