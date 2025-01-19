@@ -3,7 +3,7 @@ import asyncio
 
 from telebot.async_telebot import AsyncTeleBot
 
-bot = AsyncTeleBot('7659409584:AAF1twu-Ai52G10sl85qLHeSiJjaBfW_4r8')
+bot = AsyncTeleBot('')
 
 
 # Handle '/start' and '/help'
@@ -16,8 +16,8 @@ async def send_welcome(message):
 # Handle all other messages with content_type 'text' (content_types defaults to ['text'])
 @bot.message_handler(func=lambda message: True)
 async def echo_message(message):
-    if message.text.lower().endswith('- кто?') :
-        message.text = message.text.split('-')[0] + '- гей'
+    if message.text.lower().endswith('- ГЄГІГ®?') :
+        message.text = message.text.split('-')[0] + '- ГЈГҐГ©'
     await bot.reply_to(message, message.text)
 
 
