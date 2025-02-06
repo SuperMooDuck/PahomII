@@ -25,7 +25,6 @@
   <ItemGroup>
     <Compile Include="alarm_module.py" />
     <Compile Include="bot_module.py" />
-    <Compile Include="bot_handlers.py" />
     <Compile Include="main.py" />
     <Compile Include="storage_module.py" />
   </ItemGroup>
