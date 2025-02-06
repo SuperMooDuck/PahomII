@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>061262e2-df60-46b2-96de-86b77a671c92</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>TGBot.py</StartupFile>
+    <StartupFile>main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -12,6 +12,7 @@
     <Name>TGBot</Name>
     <RootNamespace>TGBot</RootNamespace>
     <InterpreterId>Global|PythonCore|3.12</InterpreterId>
+    <IsWindowsApplication>False</IsWindowsApplication>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,7 +23,11 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="TGBot.py" />
+    <Compile Include="alarm_module.py" />
+    <Compile Include="bot_module.py" />
+    <Compile Include="bot_handlers.py" />
+    <Compile Include="main.py" />
+    <Compile Include="storage_module.py" />
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="Global|PythonCore|3.12" />

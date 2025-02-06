@@ -3,8 +3,18 @@
   "WorkspaceRootPath": "C:\\Users\\SuperMooDuck\\source\\repos\\SuperMooDuck\\PahomII\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{061262E2-DF60-46B2-96DE-86B77A671C92}|TGBot.pyproj|C:\\Users\\SuperMooDuck\\Source\\Repos\\SuperMooDuck\\PahomII\\TGBot.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{061262E2-DF60-46B2-96DE-86B77A671C92}|TGBot.pyproj|solutionrelative:TGBot.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{061262E2-DF60-46B2-96DE-86B77A671C92}|TGBot.pyproj|C:\\Users\\SuperMooDuck\\Source\\Repos\\SuperMooDuck\\PahomII\\bot_module.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{061262E2-DF60-46B2-96DE-86B77A671C92}|TGBot.pyproj|solutionrelative:bot_module.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{061262E2-DF60-46B2-96DE-86B77A671C92}|TGBot.pyproj|C:\\Users\\SuperMooDuck\\Source\\Repos\\SuperMooDuck\\PahomII\\main.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{061262E2-DF60-46B2-96DE-86B77A671C92}|TGBot.pyproj|solutionrelative:main.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|c:\\Users\\SuperMooDuck\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\telebot\\async_telebot.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\SuperMooDuck\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\telebot\\types.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,19 +24,62 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "types.py",
+              "DocumentMoniker": "C:\\Users\\SuperMooDuck\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\telebot\\types.py",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\telebot\\types.py",
+              "ToolTip": "C:\\Users\\SuperMooDuck\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\telebot\\types.py",
+              "RelativeToolTip": "..\\..\\..\\..\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\telebot\\types.py",
+              "ViewState": "AgIAAGUDAAAAAAAAAAAnwHgDAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-02-05T06:17:40.691Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "async_telebot.py",
+              "DocumentMoniker": "c:\\Users\\SuperMooDuck\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\telebot\\async_telebot.py",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\telebot\\async_telebot.py",
+              "ToolTip": "c:\\Users\\SuperMooDuck\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\telebot\\async_telebot.py",
+              "RelativeToolTip": "..\\..\\..\\..\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\telebot\\async_telebot.py",
+              "ViewState": "AgIAABUEAAAAAAAAAAAnwFIEAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-02-05T05:23:19.085Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "main.py",
+              "DocumentMoniker": "C:\\Users\\SuperMooDuck\\source\\repos\\SuperMooDuck\\PahomII\\main.py",
+              "RelativeDocumentMoniker": "main.py",
+              "ToolTip": "C:\\Users\\SuperMooDuck\\source\\repos\\SuperMooDuck\\PahomII\\main.py",
+              "RelativeToolTip": "main.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-02-04T08:04:48.478Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "TGBot.py",
-              "DocumentMoniker": "C:\\Users\\SuperMooDuck\\source\\repos\\SuperMooDuck\\PahomII\\TGBot.py",
-              "RelativeDocumentMoniker": "TGBot.py",
-              "ToolTip": "C:\\Users\\SuperMooDuck\\source\\repos\\SuperMooDuck\\PahomII\\TGBot.py",
-              "RelativeToolTip": "TGBot.py",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAlAAAAAAAAAA==",
+              "Title": "bot_module.py",
+              "DocumentMoniker": "C:\\Users\\SuperMooDuck\\Source\\Repos\\SuperMooDuck\\PahomII\\bot_module.py",
+              "RelativeDocumentMoniker": "bot_module.py",
+              "ToolTip": "C:\\Users\\SuperMooDuck\\Source\\Repos\\SuperMooDuck\\PahomII\\bot_module.py",
+              "RelativeToolTip": "bot_module.py",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAewBEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-11-02T03:07:48.771Z",
+              "WhenOpened": "2025-02-04T06:18:00.124Z",
               "EditorCaption": ""
             }
           ]
