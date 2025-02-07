@@ -1,4 +1,3 @@
-# -*- coding: ansi -*-
 import asyncio
 import logging
 from alarm_module import alarm

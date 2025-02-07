@@ -25,6 +25,13 @@ async def echo_message(message):
     await bot.reply_to(message, message.text)
 '''
 
+#async def command(message : telebot.types.Message):
+
+@bot.message_handler(func=lambda message: True)
+async def echo_message(message : telebot.types.Message):
+    if not message.text.startswith("!"):
+        pass
+
 @bot.message_handler(chat_types = ["group", "supergroup", "channel"])
 async def any_group_message(message : telebot.types.Message):
     print ("group message")
@@ -33,22 +40,8 @@ async def any_group_message(message : telebot.types.Message):
         await bot.send_message(message.chat.id, text = text_reaction)
 
 def get_text_reaction(message : telebot.types.Message) -> str :
-    reply = ""
     for re_mask in storage.text_reactions:
         re_match = re.fullmatch(re_mask, message.text.lower())
         if not re_match: continue
-        reply_template = storage.text_reactions[re_mask]
-
-        part_start = 0
-        part_index = 1
-        index = 0
-        for c in reply_template:
-            if c == "\\" and reply_template[index + 1].isdigit():
-                reply += reply_template[part_start: index] + re_match.group(part_index)
-                index += 1
-                part_index += 1
-                part_start = index + 1
-            index += 1
-        if part_start < len(reply_template):
-            reply += reply_template[part_start:]
-    return reply
+        return re_match.expand(storage.text_reactions[re_mask])
+    return None
