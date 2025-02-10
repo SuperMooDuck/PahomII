@@ -26,8 +26,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -36,10 +40,8 @@
               "RelativeDocumentMoniker": "bot.py",
               "ToolTip": "C:\\Users\\SuperMooDuck\\source\\repos\\SuperMooDuck\\PahomII\\bot.py",
               "RelativeToolTip": "bot.py",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-02-04T05:38:27Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-04T05:38:27Z"
             },
             {
               "$type": "Document",
@@ -49,10 +51,8 @@
               "RelativeDocumentMoniker": "storage.py",
               "ToolTip": "C:\\Users\\SuperMooDuck\\source\\repos\\SuperMooDuck\\PahomII\\storage.py",
               "RelativeToolTip": "storage.py",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABkAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-02-03T02:19:18.636Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-03T02:19:18.636Z"
             },
             {
               "$type": "Document",
@@ -62,20 +62,18 @@
               "RelativeDocumentMoniker": "alarm.py",
               "ToolTip": "C:\\Users\\SuperMooDuck\\source\\repos\\SuperMooDuck\\PahomII\\alarm.py",
               "RelativeToolTip": "alarm.py",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-01-31T03:20:58.181Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-31T03:20:58.181Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "main.py",
-              "DocumentMoniker": "C:\\Users\\SuperMooDuck\\Source\\Repos\\SuperMooDuck\\PahomII\\main.py",
+              "DocumentMoniker": "C:\\Users\\SuperMooDuck\\source\\repos\\SuperMooDuck\\PahomII\\main.py",
               "RelativeDocumentMoniker": "main.py",
-              "ToolTip": "C:\\Users\\SuperMooDuck\\Source\\Repos\\SuperMooDuck\\PahomII\\main.py",
+              "ToolTip": "C:\\Users\\SuperMooDuck\\source\\repos\\SuperMooDuck\\PahomII\\main.py",
               "RelativeToolTip": "main.py",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-01-16T23:47:01.794Z",
               "EditorCaption": ""

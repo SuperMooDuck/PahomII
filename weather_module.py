@@ -7,11 +7,26 @@ from datetime import timedelta
 from bs4 import BeautifulSoup
 
 
-async def GetWeatherGismeteo(days:int = 1) -> str:
-    reply = "Погода от Gismeteo.ru\n"
+async def GetWeatherGismeteo(city:str = "bir", days:int = 1) -> str:
+    if type(days) is str:
+        days = int(days)
+
+    base_url = "https://www.gismeteo.ru/"
+    match city:
+        case "bir": 
+            city = "Биробиджан"
+            base_url += "weather-birobidzhan-4860/"
+        case "khab": 
+            city = "Хабаровск"
+            base_url += "weather-khabarovsk-4862/"
+        case _: 
+            raise Exception("Unknown city for Gismeteo weather")
+    
+    reply = f"Погода от Gismeteo.ru для города {city}\n"
 
     for day in range(days):
-        url = "https://www.gismeteo.ru/weather-birobidzhan-4860/"
+        
+        url = base_url
         if day > 1:
             url += f"{day+1}-day/"
         elif day > 0:

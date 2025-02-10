@@ -3,45 +3,45 @@ import telebot
 from telebot import async_telebot
 import re
 from storage_module import storage
+import weather_module
 
 bot = async_telebot.AsyncTeleBot(storage.bot_key)
 
 async def WorkCycle():
     await bot.infinity_polling(skip_pending=True)
 
-'''
-# Handle '/start' and '/help'
-@bot.message_handler(commands=['help', 'start'])
-async def send_welcome(message):
-    text = 'Hi, I am EchoBot.\nJust write me something and I will repeat it!'
-    await bot.reply_to(message, text)
-
-
-# Handle all other messages with content_type 'text' (content_types defaults to ['text'])
 @bot.message_handler(func=lambda message: True)
-async def echo_message(message):
-    if message.text.lower().endswith('- gay?') :
-        message.text = message.text.split('-')[0] + '- gay'
-    await bot.reply_to(message, message.text)
-'''
+async def any_message_handler(message : telebot.types.Message):
+    if message.text.startswith("/"): 
+        await command_handler(message)
+        return
+    await text_reaction_handler(message)
 
-#async def command(message : telebot.types.Message):
+@bot.inline_handler(lambda query: True)
+async def inline_handler(query: telebot.types.InlineQuery):
+    print("Inline handler")
+    a = telebot.types.InlineQueryResultArticle('1', 'Вилкой в глаз.', telebot.types.InputTextMessageContent('Вилкой в глаз.'))
+    b = telebot.types.InlineQueryResultArticle('2', 'В жопу раз.', telebot.types.InputTextMessageContent('В жопу раз.'))
+    await bot.answer_inline_query(query.id,results = [a, b])
 
-@bot.message_handler(func=lambda message: True)
-async def echo_message(message : telebot.types.Message):
-    if not message.text.startswith("!"):
-        pass
 
-@bot.message_handler(chat_types = ["group", "supergroup", "channel"])
-async def any_group_message(message : telebot.types.Message):
-    print ("group message")
-    text_reaction = get_text_reaction(message)
-    if text_reaction:
-        await bot.send_message(message.chat.id, text = text_reaction)
-
-def get_text_reaction(message : telebot.types.Message) -> str :
+async def text_reaction_handler(message : telebot.types.Message) -> str :
     for re_mask in storage.text_reactions:
         re_match = re.fullmatch(re_mask, message.text.lower())
         if not re_match: continue
-        return re_match.expand(storage.text_reactions[re_mask])
-    return None
+        await bot.send_message(message.chat.id, text = re_match.expand(storage.text_reactions[re_mask]))
+        return
+
+async def command_handler(message : telebot.types.Message):
+    if not message.text.startswith("/"): return
+    try:
+        splited_strings = message.text[1:].split(" ")
+        reply = None
+        match splited_strings[0]:
+            case "weather":
+                if len(splited_strings) == 1: reply = await weather_module.GetWeatherGismeteo()
+                else: reply = await weather_module.GetWeatherGismeteo(*splited_strings[1:])
+        if reply:
+            await bot.send_message(message.chat.id, text = reply)
+    except:
+        await bot.send_message(message.chat.id, text = "Command error")
