@@ -3,12 +3,15 @@ import aiohttp
 import asyncio
 import re
 import emoji
+import telebot
 from datetime import datetime
 from datetime import timedelta
 from bs4 import BeautifulSoup
 
+import bot_module
 
-async def GetWeatherGismeteo(city:str = "both", days:int = 1) -> str:
+
+async def GetWeatherGismeteo(city:str, days:int) -> str:
     if type(days) is str:
         days = int(days)
 

@@ -46,6 +46,7 @@ async def send_to_home_chat(text : str):
 
 command_functions_list = {"weather": weather_module.GetWeatherGismeteo,
                           "say": send_to_home_chat}
+re_arguments = re.compile(r'"[^"]+"|[^\s"]+')
 
 async def command_handler(message : types.Message):
     try:
@@ -55,26 +56,21 @@ async def command_handler(message : types.Message):
             if bot.get_my_name != name: return
 
         args = []
-        while len(arguments_string) > 0:
-            nearest_space = args.find(" ")
-            nearest_quote = args.find("\"")
-            if nearest_space < nearest_quote:
-                args.append(arguments_string[0:nearest_space])
-                arguments_string = arguments_string[nearest_space+1:]
+        for arg in re_arguments.findall(arguments_string):
+            if arg.startswith('"'):
+                args.append(arg[1:-1])
+            elif arg.isdecimal():
+                args.append(int(arg))
+            else:
+                args.append(arg)
 
-
-
-        splited_strings = message.text[1:].split(" ")
-        if splited_strings[0].find("@") > -1:
-            splited_strings[0] = splited_strings[0][0:splited_strings[0].find("@")]
-
-        if splited_strings[0] == "sethomechat":
+        if command == "sethomechat":
             await set_home_chat(message)
             return
 
-        for command in command_functions_list:
-            if command != splited_strings[0]: continue;
-            await bot.send_message(message.chat.id, text = await command_functions_list[command](*splited_strings[1:]), parse_mode="Markdown")
+        if command_functions_list[command]:
+           # await command_functions_list[command](*args) message
+
     except Exception as e:
         print(traceback.format_exc())
         await bot.send_message(message.chat.id, text = f"Command error: {e}")
