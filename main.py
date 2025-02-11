@@ -9,5 +9,5 @@ async def main():
     asyncio.create_task(alarm.WorkCycle())
     await bot_module.WorkCycle()
 
-logger.level = logging.DEBUG
+#logger.level = logging.DEBUG
 asyncio.run(main())
