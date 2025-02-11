@@ -1,3 +1,4 @@
+# -*- coding: ansi -*-
 import asyncio
 import logging
 from alarm_module import alarm
@@ -10,4 +11,7 @@ async def main():
     await bot_module.WorkCycle()
 
 #logger.level = logging.DEBUG
+import datetime
+alarm.add_periodical_alarm(datetime.time(minute = 1), bot_module.send_to_home_chat, ["≈жеминутное напоминание, что вы все пидоры"])
+
 asyncio.run(main())
