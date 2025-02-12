@@ -1,15 +1,16 @@
-﻿import asyncio
-from telebot import types
+﻿from telebot import types
 from telebot import async_telebot
 import re
 from storage_module import storage
-import weather_module
 import traceback
 
 bot = async_telebot.AsyncTeleBot(storage.bot_key)
 
 async def WorkCycle():
     await bot.infinity_polling(skip_pending=True)
+
+async def answer_to(message : types.Message, text : str):
+    await bot.send_message(message.chat.id, text, parse_mode = "markdown" )
 
 @bot.message_handler(func=lambda message: True)
 async def any_message_handler(message : types.Message):
@@ -33,27 +34,16 @@ async def text_reaction_handler(message : types.Message) -> str :
         await bot.send_message(message.chat.id, text = re_match.expand(storage.text_reactions[re_mask]))
         return
 
-async def set_home_chat(message : types.Message):
-    if message.chat.type in ["group", "supergroup", "channel"]:
-        storage.home_chat_id = message.chat.id
-        storage.save_data()
-        await bot.send_message(message.chat.id, text = f"Home chat set.")
-    else:
-        await bot.send_message(message.chat.id, text = f"Error. Chat must be group.")
+command_functions_list = {}
 
-async def send_to_home_chat(text : str):
-    await bot.send_message(storage.home_chat_id, text = text)
-
-command_functions_list = {"weather": weather_module.GetWeatherGismeteo,
-                          "say": send_to_home_chat}
 re_arguments = re.compile(r'"[^"]+"|[^\s"]+')
-
 async def command_handler(message : types.Message):
     try:
         command, separator, arguments_string =  message.text[1:].partition(" ")
         if command.find("@") > -1:
             command, separator, name = command.partition("@")
-            if bot.get_my_name != name: return
+            actual_name = (await bot.get_me()).username
+            if actual_name != name: return
 
         args = []
         for arg in re_arguments.findall(arguments_string):
@@ -64,13 +54,14 @@ async def command_handler(message : types.Message):
             else:
                 args.append(arg)
 
-        if command == "sethomechat":
-            await set_home_chat(message)
-            return
-
         if command_functions_list[command]:
-           # await command_functions_list[command](*args) message
+            await command_functions_list[command](message, *args)
 
     except Exception as e:
         print(traceback.format_exc())
         await bot.send_message(message.chat.id, text = f"Command error: {e}")
+
+def register_command(command_name : str):
+    def decorator(command_function):
+        command_functions_list[command_name] = command_function
+    return decorator

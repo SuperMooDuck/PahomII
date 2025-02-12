@@ -1,4 +1,3 @@
-# -*- coding: ansi -*-
 import aiohttp
 import asyncio
 import re
@@ -18,17 +17,15 @@ async def GetWeatherGismeteo(city:str, days:int) -> str:
     base_url = "https://www.gismeteo.ru/"
     match city:
         case "bir": 
-            city = "Áèğîáèäæàí"
+            city = "Ğ‘Ğ¸Ñ€Ğ¾Ğ±Ğ¸Ğ´Ğ¶Ğ°Ğ½"
             base_url += "weather-birobidzhan-4860/"
         case "khab": 
-            city = "Õàáàğîâñê"
+            city = "Ğ¥Ğ°Ğ±Ğ°Ñ€Ğ¾Ğ²ÑĞº"
             base_url += "weather-khabarovsk-4862/"
-        case "both":
-            return await GetWeatherGismeteo("bir", days) + "\n" + await GetWeatherGismeteo("khab", days)
         case _: 
             raise Exception("Unknown city for Gismeteo weather")
     
-    reply = f"Ïîãîäà îò Gismeteo.ru äëÿ ãîğîäà {city}\n"
+    reply = f"ĞŸĞ¾Ğ³Ğ¾Ğ´Ğ° Ğ¾Ñ‚ Gismeteo.ru Ğ´Ğ»Ñ Ğ³Ğ¾Ñ€Ğ¾Ğ´Ğ° {city}\n"
 
     for day in range(days):
         
@@ -64,13 +61,13 @@ async def GetWeatherGismeteo(city:str, days:int) -> str:
         for div in base_div.find("div", {"class" : "widget-row widget-row-icon"}).find_all("div", {"class" : "row-item"}):
             value = div["data-tooltip"].lower()
             emoji_text = ""
-            if value.find("ÿñíî") > -1:
+            if value.find("ÑÑĞ½Ğ¾") > -1:
                 emoji_text = ":sun:"
-            elif value.find("ãğîçà") > -1:
+            elif value.find("Ğ³Ñ€Ğ¾Ğ·Ğ°") > -1:
                 emoji_text = ":cloud_with_lightning_and_rain:"
             else:
-                sun =  0 if value.find("ïàñìóğíî") > -1 else 1
-                rain =  1 if value.find("äîæäü") > -1 or value.find("ñíåã") > -1 else 0
+                sun =  0 if value.find("Ğ¿Ğ°ÑĞ¼ÑƒÑ€Ğ½Ğ¾") > -1 else 1
+                rain =  1 if value.find("Ğ´Ğ¾Ğ¶Ğ´ÑŒ") > -1 or value.find("ÑĞ½ĞµĞ³") > -1 else 0
                 match (sun, rain):
                     case (1, 0): emoji_text = ":sun_behind_cloud:"
                     case (0, 1): emoji_text = ":cloud_with_rain:"
@@ -83,8 +80,8 @@ async def GetWeatherGismeteo(city:str, days:int) -> str:
             if (i != 2 and i != 4 and i < 6): continue
             reply += (f"{emoji.emojize(list_overcast[i])} {list_time[i].rjust(5)}; "
                       f"{emoji.emojize(":thermometer:")}{list_temp[i].rjust(3)}; "
-                      f"{emoji.emojize(":tornado:")}{list_wind[i].rjust(2)} ì\ñ; "
-                      f"{emoji.emojize(":droplet:")}{list_rain[i].rjust(2)} ìì\n")
+                      f"{emoji.emojize(":tornado:")}{list_wind[i].rjust(2)} Ğ¼\Ñ; "
+                      f"{emoji.emojize(":droplet:")}{list_rain[i].rjust(3)} Ğ¼Ğ¼\n")
         reply += "```\n"
 
     return reply
