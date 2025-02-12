@@ -2,7 +2,7 @@ import asyncio
 import datetime
 import traceback
 from storage_module import storage
-import commands_module
+import re
 
 class Alarm:
 
@@ -29,11 +29,23 @@ class Alarm:
                         await alarm[2](commands_module.home_chat_message, *alarm[3])
 
             except Exception as e:
+                e.add_note("Alarm error.")
                 print(traceback.format_exc())
                 await commands_module.send_to_home_chat(f"Alarm error: {e}")
 
             finally:
                 await asyncio.sleep(30)
+
+    re_time = re.compile(r"^(d|p)(\d{1,2}):(\d\d)$")
+    def add_alarm(self, type_and_time : str, command, args : list = []):
+        re_match = self.re_time.fullmatch(type_and_time)
+        if not re_match:
+            raise Exception("Alarm adding error. Incorrect time format.")
+        time = datetime.time(re_match.group[1], re_match.group[2])
+        if (re_match.group[0] == "d"):
+            self.add_daily_alarm(time, command, args)
+        else:
+            self.add_periodical_alarm(time, command, args)
 
     def add_daily_alarm(self, time : datetime.time, action, args : list = []):
         last_date_triggered = datetime.datetime.now().date
@@ -45,5 +57,4 @@ class Alarm:
         period_in_minutes = period_in_minutes.hour * 60 + period_in_minutes.minute
         self.alarms_periodical.append([last_time_triggered, period_in_minutes, action, args])
         
-
 alarm = Alarm()
