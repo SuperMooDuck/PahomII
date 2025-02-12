@@ -31,7 +31,7 @@ async def text_reaction_handler(message : types.Message) -> str :
     for re_mask in storage.text_reactions:
         re_match = re.fullmatch(re_mask, message.text.lower())
         if not re_match: continue
-        await bot.send_message(message.chat.id, text = re_match.expand(storage.text_reactions[re_mask]))
+        await answer_to(message, text = re_match.expand(storage.text_reactions[re_mask]))
         return
 
 command_functions_list = {}
@@ -59,9 +59,10 @@ async def command_handler(message : types.Message):
 
     except Exception as e:
         print(traceback.format_exc())
-        await bot.send_message(message.chat.id, text = f"Command error: {e}")
+        await answer_to(message, text = f"Command error: {e}")
 
 def register_command(command_name : str):
     def decorator(command_function):
         command_functions_list[command_name] = command_function
+        return command_function
     return decorator

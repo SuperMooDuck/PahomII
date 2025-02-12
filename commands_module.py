@@ -5,6 +5,22 @@ from bot_module import register_command
 from bot_module import answer_to
 from storage_module import storage
 
+class FMessage:
+	def __init__(self, user_id, chat_id, text):
+		self.text = text
+		self.chat = self.Chat(chat_id)
+		self.from_user = self.From_user(user_id)
+
+	class Chat:
+		def __init__(self, id):
+			self.id = id
+
+	class From_user:
+		def __init__(self, id):
+			self.id = id
+
+home_chat_message = FMessage(None, storage.home_chat_id, None)
+
 @register_command("sethomechat")
 async def set_home_chat(message : types.Message):
     if message.chat.type in ["group", "supergroup", "channel"]:

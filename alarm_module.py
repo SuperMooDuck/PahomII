@@ -2,7 +2,7 @@ import asyncio
 import datetime
 import traceback
 from storage_module import storage
-import bot_module
+import commands_module
 
 class Alarm:
 
@@ -20,17 +20,17 @@ class Alarm:
                 for alarm in self.alarms_daily:
                     if alarm[0] == current_time and alarm[1] != current_date:
                         alarm[1] = current_date
-                        await alarm[2](*alarm[3])
+                        await alarm[2](commands_module.home_chat_message, *alarm[3])
 
                 for alarm in self.alarms_periodical:
                     time_since_last_trigger = (current_datetime - alarm[0]).total_seconds() // 60
                     if time_since_last_trigger >= alarm[1]:
                         alarm[0] = current_datetime
-                        await alarm[2](*alarm[3])
+                        await alarm[2](commands_module.home_chat_message, *alarm[3])
 
             except Exception as e:
                 print(traceback.format_exc())
-                await bot_module.send_to_home_chat(f"Alarm error: {e}")
+                await commands_module.send_to_home_chat(f"Alarm error: {e}")
 
             finally:
                 await asyncio.sleep(30)
