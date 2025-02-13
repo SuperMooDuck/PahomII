@@ -10,7 +10,7 @@ async def WorkCycle():
     await bot.infinity_polling(skip_pending=True)
 
 async def answer_to(message : types.Message, text : str):
-    await bot.send_message(message.chat.id, text, parse_mode = "markdown" )
+    await bot.send_message(message.chat.id, text, parse_mode = "markdown") 
 
 @bot.message_handler(func=lambda message: True)
 async def any_message_handler(message : types.Message):
@@ -55,11 +55,11 @@ async def command_handler(message : types.Message):
                 args.append(arg)
 
         if command_functions_list[command]:
-            await command_functions_list[command](message, *args)
+            await command_functions_list[command](*args, message = message)
 
     except Exception as e:
         print(traceback.format_exc())
-        await answer_to(message, text = f"Command error: {e}")
+        await bot.send_message(message.chat.id, text = f"Command error: {type(e).__name__}. {e}")
 
 def register_command(command_name : str):
     def decorator(command_function):
