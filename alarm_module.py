@@ -1,7 +1,6 @@
 import asyncio
 import datetime
 import traceback
-from storage_module import storage
 import re
 
 class Alarm:
@@ -34,6 +33,10 @@ class Alarm:
 
             finally:
                 await asyncio.sleep(30)
+
+    def load_alarms(self, storage):
+        for a in storage:
+            self.add_alarm(*a)
 
     re_time = re.compile(r"^(d|p)(\d{1,2}):(\d\d)$")
     def add_alarm(self, type_and_time : str, command, args : list = []):

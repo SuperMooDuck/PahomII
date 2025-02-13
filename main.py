@@ -8,6 +8,7 @@ import bot_module
 import commands_module
 
 async def main():
+    alarm.load_alarms(storage.alarms)
     asyncio.create_task(alarm.WorkCycle())
     print ("Bot started")
     await bot_module.WorkCycle()
