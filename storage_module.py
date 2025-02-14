@@ -9,7 +9,7 @@ class Storage:
     def __init__(self):
         self.bot_key = ""
         self.alarms = []
-        self.text_reactions = {}
+        self.text_reactions = []
         self.home_chat_id = None
 
     def load_data(self):

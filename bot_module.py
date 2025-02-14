@@ -51,10 +51,10 @@ class Bot:
 
 
     async def text_reaction_handler(self, message : types.Message) -> str :
-        for re_mask in storage.text_reactions:
+        for re_mask, reaction in storage.text_reactions:
             re_match = re.fullmatch(re_mask, message.text.lower())
             if not re_match: continue
-            await self.answer_to(message, text = re_match.expand(storage.text_reactions[re_mask]))
+            await self.answer_to(message, text = re_match.expand(reaction))
             return
 
     async def command_handler(self, message : types.Message):

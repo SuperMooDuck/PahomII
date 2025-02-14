@@ -3,25 +3,7 @@ import weather_module
 from telebot import types
 from bot_module import bot
 from storage_module import storage
-
-
-class FakeMessage:
-    def __init__(self, chat_id, user_id = None, text = None):
-        self.text = text
-        self.chat = self.Chat(chat_id)
-        self.from_user = self.From_user(user_id)
-
-    class Chat:
-         def __init__(self, id):
-            self.type = "group"
-            self.id = id            
-
-    class From_user:
-        def __init__(self, id):
-            self.id = id
-
-def home_chat_message(): 
-    return FakeMessage(None, storage.home_chat_id, None)
+import re
 
 @bot.register_command("sethomechat")
 async def sethomechat(message : types.Message):
@@ -85,6 +67,44 @@ async def alarm_remove(number : int, message : types.Message):
     await bot.answer_to(message, "Alarm removed.")
     await alarm_print(message)
 
+@bot.register_command("reaction")
+async def reaction(action : str, *args : list, message : types.Message):
+    match action:
+        case "print":
+            await reaction_print(*args, message = message)
+        case "add":
+            await reaction_add(*args, message = message)
+        case "remove":
+            await reaction_remove(*args, message = message)
+        case _:
+            raise Exception("Unknown reaction action")
+
+async def reaction_add(mask : str, reaction : str, message : types.Message):
+    re.compile(mask)
+    re.compile(reaction)
+    storage.text_reactions.append((mask, reaction))
+    storage.save_data()
+    await bot.answer_to(message, "Reaction added.")
+    await reaction_print(message)
+
+async def reaction_print(message : types.Message):
+    reply = "```\nText reactions:\n"
+    i = 0
+    for mask, reaction in storage.text_reactions:
+        reply += f"{i} : {mask} - {reaction}\n"
+        i += 1
+    reply += "```"
+    await bot.answer_to(message, reply)
+
+async def reaction_remove(number : int, message : types.Message):
+    if len(storage.alarms) <= number:
+        await bot.answer_to(message, "Invalid reaction index.")
+        return
+    storage.text_reactions.pop(number)
+    storage.save_data()
+    await bot.answer_to(message, "Reaction removed.")
+    await reaction_print(message)
+
 @bot.register_command("test")
-async def test(message : types.Message  = home_chat_message()):
+async def test(message : types.Message):
     await alarm.test_first_daily_alarm()
