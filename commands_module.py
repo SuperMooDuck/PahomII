@@ -5,6 +5,14 @@ from bot_module import bot
 from storage_module import storage
 import re
 
+@bot.register_command("start")
+async def start(message : types.Message):
+    await bot.answer_to(message, text = "Рыба - карась, игра - началась.")
+
+@bot.register_command("help")
+async def start(message : types.Message):
+    await bot.answer_to(message, text = "За помощью - обращайтесь к психиатору.")
+
 @bot.register_command("sethomechat")
 async def sethomechat(message : types.Message):
     if message.chat.type in ["group", "supergroup", "channel"]:
