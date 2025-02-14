@@ -116,4 +116,8 @@ async def reaction_remove(number : int, message : types.Message):
 
 @bot.register_command("test")
 async def test(message : types.Message):
-    await alarm.test_first_daily_alarm()
+    await bot.bot.send_message(message.chat.id, "https://img10.joyreactor.cc/pics/post/full/Kayriko-Tifa-Lockhart-Final-Fantasy-VII-8659111.jpeg")
+    await bot.bot.send_photo(message.chat.id, "https://img10.joyreactor.cc/pics/post/full/Kayriko-Tifa-Lockhart-Final-Fantasy-VII-8659111.jpeg")
+    await bot.bot.send_media_group(message.chat.id, [types.InputMediaPhoto("https://img10.joyreactor.cc/pics/post/full/Kayriko-Tifa-Lockhart-Final-Fantasy-VII-8659111.jpeg", "sosochka"), types.InputMediaPhoto("https://img10.joyreactor.cc/pics/post/full/Kayriko-Tifa-Lockhart-Final-Fantasy-VII-8659111.jpeg", "sosochka2")])
+    await bot.bot.send_video(message.chat.id, "https://img2.joyreactor.cc/pics/post/webm/дети-вода-шлем-8781225.webm")
+    await bot.bot.send_video(message.chat.id, "https://img2.joyreactor.cc/pics/post/mp4/дети-вода-шлем-8781225.mp4")
