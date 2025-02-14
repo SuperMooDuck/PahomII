@@ -90,7 +90,7 @@ async def reaction(action : str, *args : list, message : types.Message):
 
 async def reaction_add(mask : str, reaction : str, message : types.Message):
     re.compile(mask)
-    re.compile(reaction)
+    #re.compile(reaction)
     storage.text_reactions.append((mask, reaction))
     storage.save_data()
     await bot.answer_to(message, "Reaction added.")
@@ -106,7 +106,7 @@ async def reaction_print(message : types.Message):
     await bot.answer_to(message, reply)
 
 async def reaction_remove(number : int, message : types.Message):
-    if len(storage.alarms) <= number:
+    if len(storage.text_reactions) <= number:
         await bot.answer_to(message, "Invalid reaction index.")
         return
     storage.text_reactions.pop(number)
