@@ -62,7 +62,7 @@ class Bot:
             command, separator, arguments_string =  message.text[1:].partition(" ")
             if command.find("@") > -1:
                 command, separator, name = command.partition("@")
-                actual_name = (await bot.get_me()).username
+                actual_name = (await bot.bot.get_me()).username
                 if actual_name != name: return
 
             args = []
