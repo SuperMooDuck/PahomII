@@ -1,3 +1,4 @@
+# -*- coding: ansi -*-
 from alarm_module import alarm
 import weather_module
 from telebot import types
