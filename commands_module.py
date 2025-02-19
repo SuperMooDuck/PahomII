@@ -5,6 +5,7 @@ from telebot import types
 from bot_module import bot
 from storage_module import storage
 import re
+import joy_parser_module
 
 @bot.register_command("start")
 async def start(message : types.Message):
@@ -116,8 +117,5 @@ async def reaction_remove(number : int, message : types.Message):
 
 @bot.register_command("test")
 async def test(message : types.Message):
-    await bot.bot.send_message(message.chat.id, "https://img10.joyreactor.cc/pics/post/full/Kayriko-Tifa-Lockhart-Final-Fantasy-VII-8659111.jpeg")
-    await bot.bot.send_photo(message.chat.id, "https://img10.joyreactor.cc/pics/post/full/Kayriko-Tifa-Lockhart-Final-Fantasy-VII-8659111.jpeg")
-    await bot.bot.send_media_group(message.chat.id, [types.InputMediaPhoto("https://img10.joyreactor.cc/pics/post/full/Kayriko-Tifa-Lockhart-Final-Fantasy-VII-8659111.jpeg", "sosochka"), types.InputMediaPhoto("https://img10.joyreactor.cc/pics/post/full/Kayriko-Tifa-Lockhart-Final-Fantasy-VII-8659111.jpeg", "sosochka2")])
-    await bot.bot.send_video(message.chat.id, "https://img2.joyreactor.cc/pics/post/webm/дети-вода-шлем-8781225.webm")
-    await bot.bot.send_video(message.chat.id, "https://img2.joyreactor.cc/pics/post/mp4/дети-вода-шлем-8781225.mp4")
+    bot.bot.send_media_group(message.chat.id, )
+    await joy_parser_module.joy_load_posts()

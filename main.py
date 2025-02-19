@@ -7,6 +7,7 @@ from storage_module import storage
 from bot_module import bot
 import commands_module
 
+
 async def main():
     load_alarms()
     bot.init_telebot()
@@ -20,5 +21,5 @@ def load_alarms():
         alarm.add_alarm(type_and_time, command_name, bot.command_functions_list[command_name], args)
 
 #logger.level = logging.DEBUG
-
+#asyncio.run(joy_parser_module.joy_load_posts())
 asyncio.run(main())
