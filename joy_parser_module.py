@@ -62,7 +62,7 @@ STORED_POST_LIMIT = 50
 
 def store_post_id_if_new(post_id : int) -> bool:
     if post_id in storage.joy_old_post_ids: return False
-    if len(storage.joy_old_post_ids) >= 50: storage.joy_old_post_ids.pop(0)
+    if len(storage.joy_old_post_ids) >= STORED_POST_LIMIT: storage.joy_old_post_ids.pop(0)
     storage.joy_old_post_ids.append(post_id)
     storage.save_data()
     return True

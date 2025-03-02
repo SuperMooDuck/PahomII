@@ -9,7 +9,6 @@ import commands_module
 
 
 async def main():
-    storage.joy_old_post_ids = []
     load_alarms()
     bot.init_telebot()
     asyncio.create_task(alarm.WorkCycle())
