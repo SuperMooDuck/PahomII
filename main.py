@@ -9,6 +9,7 @@ import commands_module
 
 
 async def main():
+    storage.joy_old_post_ids = []
     load_alarms()
     bot.init_telebot()
     asyncio.create_task(alarm.WorkCycle())
@@ -16,10 +17,8 @@ async def main():
     await bot.WorkCycle()
 
 def load_alarms():
-    for alarm_config in storage.alarms:
-        type_and_time, command_name, args = alarm_config
+    for type_and_time, command_name, args in storage.alarms:
         alarm.add_alarm(type_and_time, command_name, bot.command_functions_list[command_name], args)
 
 #logger.level = logging.DEBUG
-#asyncio.run(joy_parser_module.joy_load_posts())
 asyncio.run(main())

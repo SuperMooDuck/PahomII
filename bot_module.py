@@ -9,7 +9,7 @@ class Bot:
     def __init__(self):
         self.command_functions_list = {}
         self.re_arguments = re.compile(r'"[^"]+"|[^\s"]+')
-        self.bot = None
+        self.bot : async_telebot.AsyncTeleBot = None
 
     class FakeMessage:
         def __init__(self, chat_id, user_id = None, text = None):
@@ -34,8 +34,8 @@ class Bot:
     async def WorkCycle(self):
         await self.bot.infinity_polling(skip_pending=True)
 
-    async def answer_to(self, message : types.Message, text : str):
-        await self.bot.send_message(message.chat.id, text, parse_mode = "markdown") 
+    async def answer_to(self, message : types.Message, text : str, **kwargs):
+        await self.bot.send_message(message.chat.id, text, parse_mode = "markdown", **kwargs) 
 
     async def any_message_handler(self, message : types.Message):
         if message.text.startswith("/"): 
