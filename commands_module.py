@@ -116,7 +116,7 @@ async def reaction_remove(number : int, message : types.Message):
     await reaction_print(message)
 
 @bot.register_command("test")
-async def test(message : types.Message):
+async def test(*args : list, message : types.Message):
 
     async def SendMediaGroup(media_list : list[str]):
         caption : str = ''
@@ -147,10 +147,10 @@ async def test(message : types.Message):
                     await bot.bot.send_media_group(message.chat.id, media_group)
 
         except Exception as e:
-            await bot.answer_to(message, '#Media sending failed#')
+            await bot.answer_to(message, media_list[0][1] + '\n#Media sending failed#')
 
     
-    posts = await joy_parser_module.joy_load_posts()
+    posts = await joy_parser_module.joy_load_posts(*args)
 
     for post in posts:
         tags_string = ""
@@ -158,9 +158,9 @@ async def test(message : types.Message):
             tags_string += tag + " | "
         tags_string = tags_string[0:-3]
 
-        media_list = [('str', f"[{post[0]}](https://joyreactor.cc/post/{post[0]})\n{tags_string}")]
+        media_list : list[(str, str)] = [('str', f"[{post[0]}](https://joyreactor.cc/post/{post[0]})\n{tags_string}")]
         for content in post[2]:
-            match (media_list[-1], content[0]):
+            match (media_list[-1][0], content[0]):
                 case ('iframe', _):
                     await bot.answer_to(message, text = media_list[-1][1])
                     media_list = [content]

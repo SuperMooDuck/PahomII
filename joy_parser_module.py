@@ -6,8 +6,8 @@ from bs4 import BeautifulSoup
 from telebot import types
 from storage_module import storage
 
-async def joy_load_posts() -> None:
-    url : str = "https://joyreactor.cc/new"
+async def joy_load_posts(post_id : int = None) -> None:
+    url : str = r"https://joyreactor.cc/" + ("post/" + str(post_id) if post_id else "new")
     result_posts_list : list[(int, list[str], list[str])] = []
 
     async with aiohttp.ClientSession() as session:
@@ -19,7 +19,7 @@ async def joy_load_posts() -> None:
         if not content_list: continue
         
         post_id : int = int(post.find("div", class_ = "flex gap-2 xl:gap-1").find("a")["href"].split("/")[2])
-        if not store_post_id_if_new(post_id): continue
+        #if not store_post_id_if_new(post_id): continue # ÂÅÐÍÓÒÜ ×ÒÎÁÛ ÏÎÑÒÛ ÍÅ ÏÎÂÒÎÐßËÈÑÜ, ÎÒÊËÞ×ÅÍÎ ÍÀ ÂÐÅÌß ÒÅÑÒÀ
 
         post_tags : list[str] = []
         for tag in post.find("div", class_ = "post-tags").find_all("a"):
@@ -37,11 +37,19 @@ async def joy_load_posts() -> None:
     
     return result_posts_list
 
-def parse_post_content(content_bs : bs4.ResultSet) -> str:
+def parse_post_content(content_bs : BeautifulSoup) -> str:
+    if content_bs.name == "br":
+        return []
+
     if content_bs.name == "div" and not content_bs.has_attr("class"):
         content_list : list[str] = []
+        
         for c in content_bs.children:
-            content_list.append(parse_post_content(c))
+            parsed = parse_post_content(c)
+            if type(parsed) is list:
+                content_list.extend(parsed)
+            else:
+                content_list.append(parsed)
         return content_list
 
     if (content_bs.string):
@@ -56,7 +64,7 @@ def parse_post_content(content_bs : bs4.ResultSet) -> str:
     iframe = content_bs.find("iframe")
     if iframe: return ('iframe', iframe["src"])
 
-    return "#UNSUPPORTED CONTENT#"
+    return ('str', '#UNSUPPORTED CONTENT#')
 
 STORED_POST_LIMIT = 50
 
