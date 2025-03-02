@@ -132,6 +132,10 @@ async def test(*args : list, message : types.Message):
                 case 'vid':
                     media_group.append(types.InputMediaVideo(media[1]))
 
+                case 'iframe':
+                    await bot.bot.send_message(message.chat.id, media[1])
+                    return
+
         try:
             match len(media_group):
                 case 0:
@@ -147,7 +151,7 @@ async def test(*args : list, message : types.Message):
                     await bot.bot.send_media_group(message.chat.id, media_group)
 
         except Exception as e:
-            await bot.answer_to(message, media_list[0][1] + '\n#Media sending failed#')
+            await bot.answer_to(message, f'#Media sending failed# {e}')
 
     
     posts = await joy_parser_module.joy_load_posts(*args)
@@ -165,7 +169,7 @@ async def test(*args : list, message : types.Message):
                     await bot.answer_to(message, text = media_list[-1][1])
                     media_list = [content]
                     
-                case ('img'| 'vid', 'str'| 'iframe'):
+                case ('img'| 'vid', 'str'| 'iframe') | ('str', 'iframe'):
                     await SendMediaGroup(media_list)
                     media_list = [content]
 
