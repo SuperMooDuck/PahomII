@@ -3,19 +3,11 @@ from telebot import async_telebot
 import re
 from storage_module import storage
 import traceback
+from typing import Callable
 
 class Bot:
 
-    def __init__(self):
-        self.command_functions_list = {}
-        self.re_arguments = re.compile(r'"[^"]+"|[^\s"]+')
-        self.bot : async_telebot.AsyncTeleBot = None
-
     class FakeMessage:
-        def __init__(self, chat_id, user_id = None, text = None):
-            self.text = text
-            self.chat = self.Chat(chat_id)
-            self.from_user = self.From_user(user_id)
 
         class Chat:
              def __init__(self, id):
@@ -25,6 +17,19 @@ class Bot:
         class From_user:
             def __init__(self, id):
                 self.id = id
+
+        def __init__(self, chat_id : int, user_id : int = None, text : str = None):
+            self.text = text
+            self.chat = self.Chat(chat_id)
+            self.from_user = self.From_user(user_id)
+
+    command_functions_list : dict[str, Callable]
+    re_arguments : re.Pattern
+    bot : async_telebot.AsyncTeleBot
+
+    def __init__(self):
+        self.command_functions_list = {}
+        self.re_arguments = re.compile(r'"[^"]+"|[^\s"]+')
 
     def init_telebot(self):
         self.bot = async_telebot.AsyncTeleBot(storage.bot_key)
@@ -43,13 +48,6 @@ class Bot:
         else:
             await self.text_reaction_handler(message)
 
-    async def inline_handler(self, query: types.InlineQuery):
-        print("Inline handler")
-        a = types.InlineQueryResultArticle('1', 'Вилкой в глаз.', types.InputTextMessageContent('Вилкой в глаз.'))
-        b = types.InlineQueryResultArticle('2', 'В жопу раз.', types.InputTextMessageContent('В жопу раз.'))
-        await self.bot.answer_inline_query(query.id,results = [a, b])
-
-
     async def text_reaction_handler(self, message : types.Message) -> str :
         for re_mask, reaction in storage.text_reactions:
             re_match = re.fullmatch(re_mask, message.text.lower())
@@ -65,7 +63,7 @@ class Bot:
                 actual_name = (await bot.bot.get_me()).username
                 if actual_name != name: return
 
-            args = []
+            args : list[str] = []
             for arg in self.re_arguments.findall(arguments_string):
                 if arg.startswith('"'):
                     args.append(arg[1:-1])
@@ -74,7 +72,7 @@ class Bot:
                 else:
                     args.append(arg)
 
-            if self.command_functions_list[command]:
+            if command in self.command_functions_list:
                 await self.command_functions_list[command](*args, message = message)
 
         except Exception as e:
@@ -90,6 +88,11 @@ class Bot:
             self.command_functions_list[command_name] = decorated_function
             return decorated_function
         return decorator
-        
+
+    async def inline_handler(self, query: types.InlineQuery):
+        print("Inline handler")
+        a = types.InlineQueryResultArticle('1', 'Вилкой в глаз.', types.InputTextMessageContent('Вилкой в глаз.'))
+        b = types.InlineQueryResultArticle('2', 'В жопу раз.', types.InputTextMessageContent('В жопу раз.'))
+        await self.bot.answer_inline_query(query.id,results = [a, b])        
 
 bot = Bot()

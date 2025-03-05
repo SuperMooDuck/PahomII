@@ -3,15 +3,22 @@ import datetime
 import traceback
 import re
 from typing import Callable
+from bot_module import bot
 
 class Alarm:
 
-    def __init__(self):
-        self.alarms_list = []
-
     class Alarm_Config:
+        type_letter : str
+        trigger_time : datetime.time
+        command_name : str
+        command_function : Callable
+        args : list
+        last_time_triggered : datetime.datetime
+
         def __init__(self, type_letter : str, trigger_time : datetime.time, command_name : str, command_function : Callable, args : list, last_time_triggered : datetime.datetime):
-            self.type_letter = type_letter
+            self.type_letter= type_letter
+            if self.type_letter != "d" and self.type_letter != "p":
+                raise Exception(f"Unknown type letter for alarm: {self.type_letter}")
             self.trigger_time = trigger_time
             self.command_name = command_name
             self.command_function = command_function
@@ -28,7 +35,11 @@ class Alarm:
         async def trigger(self):
             self.last_time_triggered = datetime.datetime.now()
             await self.command_function(*self.args)
-            
+
+    alarms_list : list[Alarm_Config]
+
+    def __init__(self):
+        self.alarms_list = []
 
     async def WorkCycle(self):
         while True:
@@ -50,7 +61,7 @@ class Alarm:
     def add_alarm(self, type_and_time : str, command_name : str, command_function : Callable, args : list = []):
         re_match = self.re_time.fullmatch(type_and_time)
         if not re_match:
-            raise Exception("Alarm adding error. Incorrect time format.")
+            raise Exception("Alarm adding error. Incorrect alarm format.")
 
         time = datetime.time(int(re_match.group(2)), int(re_match.group(3)))
         last_time_trigerred = datetime.datetime.now()
@@ -67,6 +78,10 @@ class Alarm:
                 self.alarms_list.remove(alarm)
                 return
         raise Exception("Not found alarm to remove.")
+
+    def load_alarms(self, alarms : list[tuple[str, str, list]]):
+        for type_and_time, command_name, args in alarms:
+            alarm.add_alarm(type_and_time, command_name, bot.command_functions_list[command_name], args)
 
     async def test_first_daily_alarm(self):
         alarm = self.alarms_list[0]

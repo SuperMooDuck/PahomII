@@ -11,8 +11,6 @@ import bot_module
 
 
 async def GetWeatherGismeteo(city:str, days:int) -> str:
-    if type(days) is str:
-        days = int(days)
 
     base_url = "https://www.gismeteo.ru/"
     match city:

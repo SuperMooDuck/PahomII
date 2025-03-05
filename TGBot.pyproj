@@ -25,6 +25,10 @@
   <ItemGroup>
     <Compile Include="alarm_module.py" />
     <Compile Include="bot_module.py" />
+    <Compile Include="commands_module.py" />
+    <Compile Include="command_alarm.py" />
+    <Compile Include="command_joyreactor.py" />
+    <Compile Include="command_reaction.py" />
     <Compile Include="joy_parser_module.py" />
     <Compile Include="main.py" />
     <Compile Include="storage_module.py" />

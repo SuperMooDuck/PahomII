@@ -6,9 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "TGBot", "TGBot.pyproj", "{061262E2-DF60-46B2-96DE-86B77A671C92}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{71657E0F-B981-4F13-B758-6A762D0CA82B}"
-	ProjectSection(SolutionItems) = preProject
-		commands_module.py = commands_module.py
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
