@@ -4,8 +4,8 @@ from bs4 import BeautifulSoup
 from telebot import types
 from storage_module import storage
 
-async def joy_load_posts(post_id : int = None) -> list[(int, list[str], list[str])]:
-    url : str = r"https://joyreactor.cc/" + ("post/" + str(post_id) if post_id else "new")
+async def joy_load_posts(request_post_id : int = None) -> list[(int, list[str], list[str])]:
+    url : str = r"https://joyreactor.cc/" + ("post/" + str(request_post_id) if request_post_id else "new")
     result_posts_list : list[(int, list[str], list[str])] = []
 
     async with aiohttp.ClientSession() as session:
@@ -17,7 +17,7 @@ async def joy_load_posts(post_id : int = None) -> list[(int, list[str], list[str
         if not content_list: continue
         
         post_id : int = int(post.find("div", class_ = "flex gap-2 xl:gap-1").find("a")["href"].split("/")[2])
-        if not post_id and not store_post_id_if_new(post_id): continue 
+        if not request_post_id and not store_post_id_if_new(post_id): continue 
 
         post_tags : list[str] = []
         for tag in post.find("div", class_ = "post-tags").find_all("a"):

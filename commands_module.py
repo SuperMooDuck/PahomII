@@ -3,6 +3,9 @@ from telebot import types
 from bot_module import bot
 from storage_module import storage
 import weather_module
+import command_alarm
+import command_reaction
+import command_joyreactor
 
 @bot.register_command("start")
 async def start(message : types.Message):
