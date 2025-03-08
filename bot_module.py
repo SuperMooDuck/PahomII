@@ -2,7 +2,7 @@
 from telebot import async_telebot
 import re
 from storage_module import storage
-import traceback
+import logging
 from typing import Callable
 
 class Bot:
@@ -76,7 +76,7 @@ class Bot:
                 await self.command_functions_list[command](*args, message = message)
 
         except Exception as e:
-            print(traceback.format_exc())
+            logging.exception("Command error. ")
             await self.bot.send_message(message.chat.id, text = f"Command error: {type(e).__name__}. {e}")
 
     def register_command(self, command_name : str):

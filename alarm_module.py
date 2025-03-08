@@ -1,6 +1,6 @@
 import asyncio
 import datetime
-import traceback
+import logging
 import re
 from typing import Callable
 from bot_module import bot
@@ -51,8 +51,7 @@ class Alarm:
                         await alarm.trigger()
 
             except Exception as e:
-                e.add_note("Alarm error.")
-                print(traceback.format_exc())
+                logging.exception("Alarm error")
 
             finally:
                 await asyncio.sleep(30)

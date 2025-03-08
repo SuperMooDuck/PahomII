@@ -1,6 +1,7 @@
 import asyncio
 import pickle
 import os
+import logging
 
 STORAGE_FILENAME = "config.pickle"
 
@@ -17,6 +18,7 @@ class Storage:
             with open(STORAGE_FILENAME, 'rb') as f:
                 self.__dict__ = pickle.load(f)
         else:
+            logging.warning("Config file not found. Initializing fresh storage.")
             self.alarms = []
             self.text_reactions = []
             self.joy_old_post_ids = []
