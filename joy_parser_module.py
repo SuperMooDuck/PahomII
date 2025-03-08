@@ -1,8 +1,8 @@
-import bs4
 import aiohttp
 from bs4 import BeautifulSoup
 from telebot import types
 from storage_module import storage
+import logging
 
 async def joy_load_posts(request_post_id : int = None) -> list[(int, list[str], list[str])]:
     url : str = r"https://joyreactor.cc/" + ("post/" + str(request_post_id) if request_post_id else "new")
@@ -71,7 +71,8 @@ def parse_post_content(content_bs : BeautifulSoup) -> str | list[str]:
     iframe = content_bs.find("iframe")
     if iframe: return ('iframe', iframe["src"])
 
-    return ('str', '#UNSUPPORTED CONTENT#')
+    logging.error('JoyReactor unsupported content:\n' + content_bs)
+    return ('str', 'JoyReactor unsupported content')
 
 STORED_POST_LIMIT = 50
 
