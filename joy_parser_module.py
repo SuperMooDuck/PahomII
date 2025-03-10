@@ -71,7 +71,7 @@ def parse_post_content(content_bs : BeautifulSoup) -> str | list[str]:
     iframe = content_bs.find("iframe")
     if iframe: return ('iframe', iframe["src"])
 
-    logging.error('JoyReactor unsupported content:\n' + content_bs)
+    logging.error(f'JoyReactor unsupported content:\n{content_bs}')
     return ('str', 'JoyReactor unsupported content')
 
 STORED_POST_LIMIT = 50

@@ -39,7 +39,7 @@ async def test(*args : list, message : types.Message):
                     await bot.bot.send_media_group(message.chat.id, media_group)
 
         except Exception as e:
-            logging.error('JoyReactor media sending failed: ' + media_list)
+            logging.error(f'JoyReactor media sending failed: {media_list}')
             await bot.answer_to(message, f'#Media sending failed# {e}')
 
     
